@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Простой чат</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chat-container {
+      width: 400px;
+      height: 600px;
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-header {
+      background-color: #007bff;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .messages-container {
+      height: calc(100% - 110px);
+      padding: 10px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message {
+      display: block;
+      max-width: 80%;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .message.sent {
+      align-self: flex-end;
+      background-color: #dcf8c6;
+    }
+
+    .message.received {
+      align-self: flex-start;
+      background-color: #e0e0eb;
+    }
+
+    .input-container {
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      background-color: #f0f0f0;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    input[type="text"] {
+      flex-grow: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+      border-radius: 20px;
+      background-color: white;
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+<div class="chat-container">
+  <!--<div class="chat-header">Мой Чат</div>
+  <div class="messages-container">
+    &lt;!&ndash; Сообщения будут добавляться сюда &ndash;&gt;
+    <div class="message received">Привет!</div>
+    <div class="message sent">Привет! Как дела?</div>
+    <div class="message received">Всё отлично, спасибо! А у тебя как?</div>
+    <div class="message sent">У меня тоже всё хорошо.</div>
+  </div>-->
+  <div class="chat-header">Мой Чат</div>
+  <div class="messages-container">
+    <!-- Динамическая вставка сообщений -->
+    <div th:each="msg : ${messages}"
+         th:classappend="${msg.mine} ? 'message sent' : 'message received'"
+         th:text="${msg.message}">
+      Message Content
+    </div>
+  </div>
+  <!--<div class="input-container">
+    <input type="text" placeholder="Ваше сообщение...">
+    <button>Отправить</button>
+  </div>-->
+  <form class="input-container" action="#" th:action="@{/message}" method="post">
+    <input type="text" name="message" placeholder="Ваше сообщение..." />
+    <button type="submit">Отправить</button>
+  </form>
+</div>
+</body>
+</html>
