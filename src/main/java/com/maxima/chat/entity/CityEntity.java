@@ -5,20 +5,20 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Сущность пользователя
+ * Сущность города
  */
 @Entity
 @Getter
 @Setter
-@Table(name = "users")
-public class UserEntity {
+@Table(name = "cities")
+@NoArgsConstructor
+public class CityEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,13 +27,6 @@ public class UserEntity {
   @Column(name = "name")
   private String name;
 
-  @Column(name = "email")
-  private String email;
-
-  @ManyToOne
-  @JoinColumn(name = "city_id")
-  private CityEntity city;
-
-  @Column(name = "city_id", insertable = false, updatable = false)
-  private Integer cityId;
+  @Column(name = "phone_code")
+  private String phoneCode;
 }
