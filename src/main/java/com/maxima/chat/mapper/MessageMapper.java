@@ -5,6 +5,9 @@ import com.maxima.chat.entity.MessageEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+/**
+ * Маппер для преобразования сообщений
+ */
 @Mapper(componentModel = "spring")
 public interface MessageMapper {
 

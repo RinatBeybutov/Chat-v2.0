@@ -8,12 +8,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * Контроллер для работы с главной страницей
+ */
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
 
   private final MessageService messageService;
 
+  /**
+   * Получение главной страницы
+   *
+   * @param model Модель для передачи данных в html шаблон
+   * @return Имя html шаблона
+   */
   @GetMapping("/")
   public String index(Model model) {
     var list = messageService.getList();
@@ -21,19 +30,15 @@ public class HomeController {
     return "index";
   }
 
+  /**
+   * Добавление сообщения в бд
+   *
+   * @param message Сообщение
+   * @return Перенаправление на главную страницу
+   */
   @PostMapping("/message")
   public String addMessage(@RequestParam("message") String message) {
     messageService.addMessage(message);
     return "redirect:/";
   }
-
-  /**
-   * @PostMapping("/send-message")
-   * public String handleMessage(@RequestParam("message") String message, Model model) {
-   *     // Логика обработки сообщения
-   *     System.out.println("Полученное сообщение: " + message);
-   *     // Возвращаем страницу обратно после отправки сообщения
-   *     return "redirect:/chat";
-   * }
-   */
 }

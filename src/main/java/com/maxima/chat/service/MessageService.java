@@ -11,6 +11,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Сервис для работы с сообщениями.
+ *
+ * @author Gaben
+ */
 @Service
 @RequiredArgsConstructor
 public class MessageService {
@@ -21,6 +26,11 @@ public class MessageService {
 
   private final UserRepository userRepository;
 
+  /**
+   * Получение списка сообщений из бд
+   *
+   * @return список сообщений
+   */
   @Transactional(readOnly = true)
   public List<MessageViewDto> getList() {
     return repository.findAll()
@@ -29,6 +39,9 @@ public class MessageService {
         .toList();
   }
 
+  /**
+   * Добавление сообщения в бд
+   */
   @Transactional
   public void addMessage(String message) {
     var user = userRepository.findById(1).get();
