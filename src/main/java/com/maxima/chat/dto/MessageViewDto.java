@@ -3,6 +3,9 @@ package com.maxima.chat.dto;
 import java.time.LocalDateTime;
 import lombok.Data;
 
+/**
+ * Дто для просмотра сообщений
+ */
 @Data
 public class MessageViewDto {
 
