@@ -19,7 +19,6 @@ public class HomeController {
 
   /**
    * Получение главной страницы
-   *
    * @param model Модель для передачи данных в html шаблон
    * @return Имя html шаблона
    */
