@@ -1,0 +1,40 @@
+openapi: 3.0.1
+info:
+  title: API для сущности сообществ
+  version: '1.0'
+servers:
+  - url: https://localhost:8080/
+
+tags:
+  - name: Tags
+    description: Операции по работе с тегами
+
+paths:
+  /tags:
+    get:
+      summary: Получение списка тегов
+      operationId: getTags
+      tags:
+        - Tags
+      responses:
+        200:
+          description: ОК
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TagViewDto'
+
+components:
+  schemas:
+    TagViewDto:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+        name:
+          type: string

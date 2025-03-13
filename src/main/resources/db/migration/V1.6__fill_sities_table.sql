@@ -20,3 +20,8 @@ update users set city_id = 1;
 -- Добавление ограничения not null для столбца city_id
 --
 alter table users alter column city_id set not null;
+
+--
+-- Добавление внешнего ключа для столбца city_id в таблице users
+--
+alter table users add constraint fk_users_city_id foreign key (city_id) references cities (id);

@@ -100,14 +100,6 @@
 </head>
 <body>
 <div class="chat-container">
-  <!--<div class="chat-header">Мой Чат</div>
-  <div class="messages-container">
-    &lt;!&ndash; Сообщения будут добавляться сюда &ndash;&gt;
-    <div class="message received">Привет!</div>
-    <div class="message sent">Привет! Как дела?</div>
-    <div class="message received">Всё отлично, спасибо! А у тебя как?</div>
-    <div class="message sent">У меня тоже всё хорошо.</div>
-  </div>-->
   <div class="chat-header">Мой Чат</div>
   <div class="messages-container">
     <!-- Динамическая вставка сообщений -->
@@ -117,10 +109,6 @@
       Message Content
     </div>
   </div>
-  <!--<div class="input-container">
-    <input type="text" placeholder="Ваше сообщение...">
-    <button>Отправить</button>
-  </div>-->
   <form class="input-container" action="#" th:action="@{/message}" method="post">
     <input type="text" name="message" placeholder="Ваше сообщение..." />
     <button type="submit">Отправить</button>
