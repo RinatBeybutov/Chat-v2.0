@@ -25,10 +25,60 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/TagViewDto'
+    post:
+      summary: Создание нового тега
+      operationId: tagCreation
+      tags:
+        - Tags
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagCreateDto'
+      responses:
+        201:
+          description: Создание нового тега
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagViewDto'
+  /tags/{id}:
+    parameters:
+      - name: id
+        in: path
+        content:
+          application/json:
+            schema:
+              type: integer
+        required: true
+    put:
+      summary: Обновление тега
+      operationId: updateTag
+      tags:
+        - Tags
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagCreateDto'
+      responses:
+        200:
+          description: Обновление тега
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagViewDto'
+    delete:
+      summary: Удаление тега
+      operationId: deleteTag
+      responses:
+        200:
+          description: Удаление тега
 
 components:
   schemas:
     TagViewDto:
+      description: Дто для представления тега
       type: object
       required:
         - id
@@ -36,5 +86,14 @@ components:
       properties:
         id:
           type: integer
+        name:
+          type: string
+
+    TagCreateDto:
+      description: Дто для создания тега
+      type: object
+      required:
+        - name
+      properties:
         name:
           type: string
