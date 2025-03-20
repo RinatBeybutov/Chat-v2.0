@@ -9,5 +9,6 @@ public class API {
 
   public static final String CITIES = "/api/v1/cities";
   public static final String MESSAGES = "/api/v1/messages";
+  public static final String USERS = "/api/v1/users";
 
 }

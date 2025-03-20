@@ -71,6 +71,8 @@ paths:
     delete:
       summary: Удаление тега
       operationId: deleteTag
+      tags:
+        - Tags
       responses:
         200:
           description: Удаление тега
