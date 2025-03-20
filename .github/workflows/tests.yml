@@ -17,3 +17,17 @@ jobs:
           cache: 'maven'
       - name: Step_3 - Run checkstyle
         run: mvn -P check-code-style validate
+
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step_1 - Checkout
+        uses: actions/checkout@v4
+      - name: Step_2 - Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
+      - name: Step_3 - Run tests
+        run: mvn -B test --file pom.xml
