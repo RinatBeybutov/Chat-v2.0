@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Регистрация</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .registration-form {
+      width: 500px;
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .registration-header {
+      background-color: #007bff;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .form-group {
+      padding: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      outline: none;
+      border-radius: 20px;
+      background-color: #f0f0f0;
+    }
+
+    .registration-btn {
+      width: 100%;
+      padding: 10px 20px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .registration-btn:hover {
+      opacity: 0.8;
+    }
+
+    .already-have-account {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 16px;
+      color: #666;
+    }
+
+    .already-have-account a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .already-have-account a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<div class="registration-form">
+  <form action="#" method="post" th:action="@{/registration}" th:object="${user}">
+    <div class="registration-header">
+      Регистрация
+    </div>
+    <div class="form-group">
+      <label for="name">Имя:</label>
+      <input type="text" class="form-control" placeholder="Ваше имя" required="required" th:field="*{name}"/>
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" placeholder="Ваш email" required="required" th:field="*{email}"/>
+    </div>
+    <div class="form-group">
+      <label for="password">Пароль:</label>
+      <input type="password" class="form-control" placeholder="Ваш пароль" required="required" th:field="*{password}"/>
+    </div>
+    <div class="form-group">
+      <label for="confirmPassword">Подтверждение пароля:</label>
+      <input type="password" class="form-control" placeholder="Подтвердите Ваш пароль" required="required" th:field="*{confirmPassword}"/>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="registration-btn">Зарегистрироваться</button>
+    </div>
+    <div class="already-have-account">
+      Уже есть аккаунт? <a href="#" th:href="@{/login}">Войдите</a>
+    </div>
+  </form>
+</div>
+</body>
+</html>
