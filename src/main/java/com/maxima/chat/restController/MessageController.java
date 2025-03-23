@@ -27,7 +27,7 @@ public class MessageController {
   @GetMapping
   @Operation(summary = "Получение списка сообщений")
   public ResponseEntity<List<MessageViewDto>> getList() {
-    return ResponseEntity.ok(messageService.getList());
+    return ResponseEntity.ok(messageService.getListForRest());
   }
 
 }

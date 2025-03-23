@@ -2,9 +2,12 @@ package com.maxima.chat.service;
 
 import com.maxima.chat.dto.MessageViewDto;
 import com.maxima.chat.entity.MessageEntity;
+import com.maxima.chat.entity.UserEntity;
+import com.maxima.chat.error.EntityNotFoundException;
 import com.maxima.chat.mapper.MessageMapper;
 import com.maxima.chat.repository.MessageRepository;
 import com.maxima.chat.repository.UserRepository;
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -32,10 +35,26 @@ public class MessageService {
    * @return список сообщений
    */
   @Transactional(readOnly = true)
-  public List<MessageViewDto> getList() {
+  public List<MessageViewDto> getListForView(Principal principal) {
+    UserEntity user = userRepository.findByEmail(principal.getName())
+        .orElseThrow(() -> new EntityNotFoundException("User not found"));
+    Integer userId = user.getId();
     return repository.findAll()
         .stream()
-        .map(mapper::toDto)
+        .map(messageEntity -> mapper.toDto(messageEntity, userId))
+        .toList();
+  }
+
+  /**
+   * Получение списка сообщений из бд
+   *
+   * @return список сообщений
+   */
+  @Transactional(readOnly = true)
+  public List<MessageViewDto> getListForRest() {
+    return repository.findAll()
+        .stream()
+        .map(messageEntity -> mapper.toDto(messageEntity, 1))
         .toList();
   }
 
@@ -43,8 +62,9 @@ public class MessageService {
    * Добавление сообщения в бд
    */
   @Transactional
-  public void addMessage(String message) {
-    var user = userRepository.findById(1).get();
+  public void addMessage(String message, String userEmail) {
+    UserEntity user = userRepository.findByEmail(userEmail)
+        .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
     MessageEntity messageEntity = new MessageEntity();
     messageEntity.setUser(user);

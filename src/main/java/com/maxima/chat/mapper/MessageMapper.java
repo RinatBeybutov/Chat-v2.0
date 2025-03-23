@@ -11,7 +11,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface MessageMapper {
 
-  @Mapping(target = "mine", expression = "java(messageEntity.getUserId().equals(1))")
+  @Mapping(target = "mine", expression = "java(messageEntity.getUserId().equals(userId))")
   @Mapping(target = "message", expression = "java(messageEntity.getUser().getName().substring(0, 3) + \" : \"+ messageEntity.getMessage())")
-  MessageViewDto toDto(MessageEntity messageEntity);
+  MessageViewDto toDto(MessageEntity messageEntity, Integer userId);
 }

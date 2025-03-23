@@ -2,6 +2,7 @@ package com.maxima.chat.repository;
 
 import com.maxima.chat.entity.UserEntity;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -26,4 +27,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 
   @Query(value = "select u.id AS id, u.name AS name from UserEntity u")
   List<UserProjection> findAllByProjection();
+
+  Optional<UserEntity> findByEmail(String email);
 }
