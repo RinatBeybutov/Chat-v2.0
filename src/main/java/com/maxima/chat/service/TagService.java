@@ -51,8 +51,7 @@ public class TagService {
    */
   @Transactional
   public TagViewDto update(Integer id, TagCreateDto tagCreateDto) {
-    TagEntity entity = repository.findById(id)
-        .orElseThrow(()  -> new EntityNotFoundException("Тег c id %s не найден".formatted(id)));
+    TagEntity entity = findTagById(id);
     entity.setName(tagCreateDto.getName());
     entity = repository.save(entity);
     return mapper.toDto(entity);
@@ -63,8 +62,12 @@ public class TagService {
    */
   @Transactional
   public void delete(Integer id) {
-    TagEntity entity = repository.findById(id)
-        .orElseThrow(()  -> new EntityNotFoundException("Тег c id %s не найден".formatted(id)));
+    TagEntity entity = findTagById(id);
     repository.delete(entity);
+  }
+
+  private TagEntity findTagById(Integer id) {
+    return repository.findById(id)
+        .orElseThrow(() -> new EntityNotFoundException("error.tag_not_found.1", id));
   }
 }
