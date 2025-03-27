@@ -36,8 +36,7 @@ public class MessageService {
    */
   @Transactional(readOnly = true)
   public List<MessageViewDto> getListForView(Principal principal) {
-    UserEntity user = userRepository.findByEmail(principal.getName())
-        .orElseThrow(() -> new EntityNotFoundException("User not found"));
+    UserEntity user = findUserByEmail(principal.getName());
     Integer userId = user.getId();
     return repository.findAll()
         .stream()
@@ -63,8 +62,7 @@ public class MessageService {
    */
   @Transactional
   public void addMessage(String message, String userEmail) {
-    UserEntity user = userRepository.findByEmail(userEmail)
-        .orElseThrow(() -> new EntityNotFoundException("User not found"));
+    UserEntity user = findUserByEmail(userEmail);
 
     MessageEntity messageEntity = new MessageEntity();
     messageEntity.setUser(user);
@@ -72,5 +70,10 @@ public class MessageService {
     messageEntity.setCreatedAt(LocalDateTime.now());
 
     repository.save(messageEntity);
+  }
+
+  private UserEntity findUserByEmail(String principal) {
+    return userRepository.findByEmail(principal)
+        .orElseThrow(() -> new EntityNotFoundException("User not found"));
   }
 }
