@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,12 +17,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "tags")
-public class TagEntity {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
-
+public class TagEntity extends BaseEntity {
   @Column(name = "name")
   private String name;
 }
