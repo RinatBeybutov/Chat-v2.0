@@ -12,6 +12,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.ActiveProfiles;
 
 /**
  * Интеграционный тест для сущности {@link com.maxima.chat.entity.TagEntity}
@@ -19,6 +20,7 @@ import org.springframework.http.HttpStatus;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DisplayName("Тестирование API для работы с тегами")
 @Import(PostgresDbTestcontainers.class)
+@ActiveProfiles("test")
 class TagApiItegrationTest {
 
   @Autowired

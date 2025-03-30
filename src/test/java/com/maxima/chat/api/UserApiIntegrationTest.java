@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.ActiveProfiles;
 
 /**
  * Интеграционный тест для сущности {@link com.maxima.chat.entity.UserEntity}
@@ -22,6 +23,7 @@ import org.springframework.http.HttpStatus;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DisplayName("Тестирование API для работы с пользователями")
 @Import(PostgresDbTestcontainers.class)
+@ActiveProfiles("test")
 class UserApiIntegrationTest {
 
   @Autowired

@@ -1,0 +1,40 @@
+version: "3.9"
+
+networks:
+  app-network:
+    driver: bridge
+
+services:
+  view:
+    image: amir20/dozzle:latest
+    container_name: view
+    ports:
+      - 8090:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  app:
+    build: .
+    container_name: app
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/chat
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=secret
+      - SERVER_PORT=8080
+      - SPRING_PROFILES_ACTIVE=develop
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+  database:
+    image: postgres:15.3-alpine
+    container_name: database
+    environment:
+      - POSTGRES_DB=chat
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=secret
+    ports:
+      - "5400:5432"
+    networks:
+      - app-network
